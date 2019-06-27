@@ -5,8 +5,5 @@ CREATE TABLE cliente(
     ENDERECO VARCHAR(200),
     PRIMARY KEY (ID)
 );
-SELECT * FROM CLIENTE;
+SELECT * FROM produto;
 
-INSERT INTO CLIENTE(NOME, ENDERECO)
-VALUES ("Pedro Tomatinho", "Rua Barbaridade, 157"),
-("Juca Peripécia", "Rua Junqueira, 157");
