@@ -6,4 +6,12 @@ CREATE TABLE cliente(
     PRIMARY KEY (ID)
 );
 SELECT * FROM produto;
+use gfood;
+CREATE TABLE produto(
+                        ID INTEGER NOT NULL AUTO_INCREMENT,
+                        NOME VARCHAR(200) NOT NULL,
+                        DESCRICAO TEXT,
+                        PRIMARY KEY (ID)
+);
+
 

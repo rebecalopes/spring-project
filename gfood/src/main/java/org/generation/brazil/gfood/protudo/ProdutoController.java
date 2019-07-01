@@ -31,6 +31,7 @@ import java.util.List;
             return produtoRepository.findById(id).map(produtoAtualizado -> {
                     produtoAtualizado.setNome(produto.getNome());
                     produtoAtualizado.setDescricao(produto.getDescricao());
+                    produtoAtualizado.setPreco(produto.getPreco());
                     return produtoRepository.save(produtoAtualizado);
         }).orElseThrow(() ->
                     new ResourceNotFoundException("Não existe produto cadastrado com o id" + id));

@@ -1,22 +1,22 @@
 package org.generation.brazil.gfood.cliente;
 
+import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class ClienteController {
 
     @Autowired
-    private ClienteRepository repository;
+    private ClienteRepository clienteRepository;
 
     @GetMapping("/clientes")
     public List<Cliente> findAll(){
         // "select * from cliente"
-        return repository.findAll();
+        return clienteRepository.findAll();
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -27,20 +27,24 @@ public class ClienteController {
         System.out.printf(cliente.getEndereco());
 
         // "insert into cliente ..."
-        return repository.save(cliente);
+        return clienteRepository.save(cliente);
     }
-
-    /* @PutMapping("/clientes/{id}")
-    public Cliente update(@PathVariable Long id, @RequestBody Cliente cliente){
-        Optional<Cliente> optionalCliente = repository.findById(id);
-
-        if (optionalCliente.)
-    } */
+    @PutMapping ("/clientes/{id}")
+    public Cliente update(@PathVariable Long id, @RequestBody Cliente cliente)
+            throws ResourceNotFoundException {
+         return clienteRepository.findById(id).map(clienteAtualizado -> {
+            clienteAtualizado.setNome(cliente.getNome());
+            clienteAtualizado.setEndereco(cliente.getEndereco());
+            clienteAtualizado.setDataNascimento(cliente.getDataNascimento());
+             return clienteRepository.save(clienteAtualizado);
+        }).orElseThrow(() ->
+                new ResourceNotFoundException("Não existe produto cadastrado com o id" + id));
+    }
 
     @DeleteMapping ("/clientes/{id}")
     public void delete (@PathVariable Long id) {
         // "delete from cliente where id= .."
-        repository.deleteById(id);
+        clienteRepository.deleteById(id);
     }
 
 }
