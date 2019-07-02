@@ -1,10 +1,12 @@
 package org.generation.brazil.gfood.cliente;
 
 import org.apache.velocity.exception.ResourceNotFoundException;
+import org.generation.brazil.gfood.protudo.Produto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 
 @RestController
@@ -17,6 +19,21 @@ public class ClienteController {
     public List<Cliente> findAll(){
         // "select * from cliente"
         return clienteRepository.findAll();
+    }
+
+    @PostMapping("/clientes/data")
+    public List<Cliente> findByDataNascimento(@RequestParam Date data){
+        return clienteRepository.findByDataNascimento(data);
+    }
+
+    /* @GetMapping("/clientes/'{nome}'")
+    public List<Cliente> findByNome(@PathVariable String nome) {
+        return clienteRepository.findByNome(nome);
+    } */
+
+    @PostMapping("/clientes/nome")
+    public List<Cliente> findByNome(@RequestParam String nome) {
+        return clienteRepository.findByNome(nome);
     }
 
     @ResponseStatus(HttpStatus.CREATED)

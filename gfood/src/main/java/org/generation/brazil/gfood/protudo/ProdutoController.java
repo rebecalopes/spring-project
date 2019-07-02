@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -23,6 +24,21 @@ import java.util.List;
     @GetMapping("/produtos")
     public List<Produto> findAll(){
        return produtoRepository.findAll();
+    }
+
+    /* @GetMapping("/produtos/'{nome}'")
+    public List<Produto> findByNome(@PathVariable String nome) {
+        return produtoRepository.findByNome(nome);
+    } */
+
+    @PostMapping("/produtos/nome")
+    public List<Produto> findByNome(@RequestParam String nome) {
+        return produtoRepository.findByNome(nome);
+    }
+
+    @GetMapping("/produtos/{id}")
+    public Optional<Produto> findById(@PathVariable Long id){
+        return produtoRepository.findById(id);
     }
 
     @PutMapping ("/produtos/{id}")

@@ -1,17 +1,17 @@
 create database gfood;
-CREATE TABLE cliente(
-	ID INTEGER NOT NULL AUTO_INCREMENT,
-    NOME VARCHAR(100) NOT NULL,
-    ENDERECO VARCHAR(200),
-    PRIMARY KEY (ID)
-);
-SELECT * FROM produto;
 use gfood;
-CREATE TABLE produto(
-                        ID INTEGER NOT NULL AUTO_INCREMENT,
-                        NOME VARCHAR(200) NOT NULL,
-                        DESCRICAO TEXT,
-                        PRIMARY KEY (ID)
+create table cliente(
+	id integer auto_increment not null ,
+    nome varchar(200) not null,
+    endereco varchar(300),
+    data_nascimento date not null,
+    primary key (id)
 );
-
+ create table produto(
+     id integer auto_increment not null,
+     nome varchar(200) not null,
+     descricao varchar(300),
+     preco decimal not null
+ );
+select * from produto;
 
